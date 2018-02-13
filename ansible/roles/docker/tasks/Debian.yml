@@ -1,0 +1,30 @@
+---
+
+- name: installing Docker service
+  apt:
+    name: docker.io
+    state: present
+
+- name: checking if daemon.json exist in /etc/docker
+  stat:
+    path: /etc/docker/daemon.json
+  register: daemon_json_file
+
+- name: creating deamon.json file in /etc/docker
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    mode: 0644
+    owner: root
+    group: root
+  when: daemon_json_file.stat.exists == False
+
+- name: configure Docker host logging to syslog
+  lineinfile:
+    path: /etc/docker/daemon.json
+    regexp: "^{}$"
+    line: "{\n\t\"log-driver\": \"syslog\"\n}"
+    backrefs: yes
+  notify:
+    - restart docker
+

@@ -1,0 +1,14 @@
+---
+
+- name: installing Docker service
+  yum:
+    name: docker
+    state: present
+
+- name: configure Docker host logging to syslog in /etc/sysconfig/docker 
+  replace:
+    path: /etc/sysconfig/docker
+    regexp: "--log-driver=[a-z]+"
+    replace: "--log-driver=syslog"
+  notify:
+    - restart docker
