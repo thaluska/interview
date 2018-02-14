@@ -1,0 +1,16 @@
+---
+
+rsyslog_install: false
+custom_logs: false
+rsyslog_custom_files:
+  "/var/log/syslog_custom.log":
+    facility: "local7"
+    priority: "*"
+  "/var/log/syslog_custom2.log":
+    facility: "mail"
+    priority: "*"
+remote_logs: false
+rsyslog_remote_facilitie: "*"
+rsyslog_remote_priorities: "*"
+rsyslog_remote_server: "10.10.10.10"
+rsyslog_remote_server_port: "513"
