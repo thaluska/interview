@@ -19,7 +19,7 @@ This role make sure that rsyslog is installed and configured for these scenario:
 
 When you run this default command:
 ```bash
-ansible$ ansible-playbook -i "localhost," -c local rsyslog.yml -K
+ansible-playbook -i "localhost," -c local rsyslog.yml -K
 ```
 Ansible will configure default loging in /var/log/*
 
